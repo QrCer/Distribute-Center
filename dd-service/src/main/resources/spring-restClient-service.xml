@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.boe.dd.service"/>
+
+    <!--RS平台请求SC平台的HttpClientFactory和restRestTemplate -->
+    <bean id="httpClientFactory"
+          class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+        <property name="connectTimeout" value="30000"/>
+        <property name="readTimeout" value="30000"/>
+    </bean>
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate" scope="prototype">
+        <constructor-arg ref="httpClientFactory"/>
+    </bean>
+
+</beans>
